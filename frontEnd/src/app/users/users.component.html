@@ -1,0 +1,148 @@
+<body style="background-color: lightgray;margin: 0px;">
+    
+    <div style="background: #e65c7b;padding: 10px;color: white;display: flex;align-items: center;justify-content: space-between;">
+        <div>
+            <a style="text-decoration: none;color: white;" href="/buyer/login"><h1 style="margin: 0px;">Company/User Management</h1></a>
+        </div>
+        <div style="display: flex;align-items: center;column-gap: 10px;font-size: 20px;font-weight: 500;">
+            <div style="margin-bottom: 20px; font-size: 30px; font-weight: 500;">
+                <button (click)="onClickAddUser()" style="background: none;border: 1px solid white;border-radius: 4px;padding: 6px 18px;color: white;font-size: 20px;font-weight: 500;cursor: pointer;">Add New</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex;align-items: center;justify-content: center;margin: 50px;column-gap: 20px;">
+        <div style="background: white;padding: 20px;display: flex;justify-content: center;flex-direction: column;row-gap: 15px;">
+            <div style="display: flex;align-items: center;justify-content: center;column-gap: 8px;">
+                <div style="color: #e65c7b;" (click)="onClickEditUser()">Edit</div>
+                <div style="height: 20px;width: 1px;background: #e65c7b;;"></div>
+                <div  style="color: #e65c7b;"  (click)="onClickDeleteUser()">Delete</div >
+            </div>
+            <div style="font-size: 24px; font-weight: 900;">Good Company</div>
+            <div style="font-size: 16px; font-weight: 900;color: #e65c7b;">Chennai, Tamil Nadu, India</div>
+            <div><a href="/companies"><button style="background: #e65c7b;border: 1px solid white;border-radius: 4px;padding: 6px 30px;color: white;font-size: 18px;margin-top: 10px;font-weight: 500;cursor: pointer;">View More</button></a></div>
+        </div>
+
+        <div style="background: white;padding: 20px;display: flex;justify-content: center;flex-direction: column;row-gap: 15px;">
+            <div style="display: flex;align-items: center;justify-content: center;column-gap: 8px;">
+                <div style="color: #e65c7b;" (click)="onClickEditUser()">Edit</div>
+                <div style="height: 20px;width: 1px;background: #e65c7b;;"></div>
+                <div  style="color: #e65c7b;"  (click)="onClickDeleteUser()">Delete</div >
+            </div>
+            <div style="font-size: 24px; font-weight: 900;">Good Company</div>
+            <div style="font-size: 16px; font-weight: 900;color: #e65c7b;">Chennai, Tamil Nadu, India</div>
+            <div><a href="/companies"><button style="background: #e65c7b;border: 1px solid white;border-radius: 4px;padding: 6px 30px;color: white;font-size: 18px;margin-top: 10px;font-weight: 500;cursor: pointer;">View More</button></a></div>
+        </div>
+
+
+        <div style="background: white;padding: 20px;display: flex;justify-content: center;flex-direction: column;row-gap: 15px;">
+            <div style="display: flex;align-items: center;justify-content: center;column-gap: 8px;">
+                <div style="color: #e65c7b;" (click)="onClickEditUser()">Edit</div>
+                <div style="height: 20px;width: 1px;background: #e65c7b;;"></div>
+                <div  style="color: #e65c7b;"  (click)="onClickDeleteUser()">Delete</div >
+            </div>
+            <div style="font-size: 24px; font-weight: 900;">Good Company</div>
+            <div style="font-size: 16px; font-weight: 900;color: #e65c7b;">Chennai, Tamil Nadu, India</div>
+            <div><a href="/companies"><button style="background: #e65c7b;border: 1px solid white;border-radius: 4px;padding: 6px 30px;color: white;font-size: 18px;margin-top: 10px;font-weight: 500;cursor: pointer;">View More</button></a></div>
+        </div>
+
+        <div style="background: white;padding: 20px;display: flex;justify-content: center;flex-direction: column;row-gap: 15px;">
+            <div style="display: flex;align-items: center;justify-content: center;column-gap: 8px;">
+                <div style="color: #e65c7b;" (click)="onClickEditUser()">Edit</div>
+                <div style="height: 20px;width: 1px;background: #e65c7b;;"></div>
+                <div  style="color: #e65c7b;"  (click)="onClickDeleteUser()">Delete</div >
+            </div>
+            <div style="font-size: 24px; font-weight: 900;">Good Company</div>
+            <div style="font-size: 16px; font-weight: 900;color: #e65c7b;">Chennai, Tamil Nadu, India</div>
+            <div><a href="/companies"><button style="background: #e65c7b;border: 1px solid white;border-radius: 4px;padding: 6px 30px;color: white;font-size: 18px;margin-top: 10px;font-weight: 500;cursor: pointer;">View More</button></a></div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isAddUserPopup ">
+        <div class="content" style="display: flex;flex-direction: column;row-gap: 30px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Add User
+            </div>
+
+            <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                <div style="width: 30%;">
+                    <label for="">Product Name</label>
+                </div>
+                <div style="width: 70%;">
+                    <input style="width: 100%;padding: 10px 50px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                <div style="width: 30%;">
+                    <label for="">Product Name</label>
+                </div>
+                <div style="width: 70%;">
+                    <input style="width: 100%;padding: 10px 50px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                </div>
+            </div>
+            
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelEditPopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <a href="/seller/dashboard/products/delete"><button style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Create</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isEditUserPopup ">
+        <div class="content" style="display: flex;flex-direction: column;row-gap: 30px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Edit User
+            </div>
+
+            <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                <div style="width: 30%;">
+                    <label for="">Product Name</label>
+                </div>
+                <div style="width: 70%;">
+                    <input style="width: 100%;padding: 10px 50px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                <div style="width: 30%;">
+                    <label for="">Product Name</label>
+                </div>
+                <div style="width: 70%;">
+                    <input style="width: 100%;padding: 10px 50px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                </div>
+            </div>
+
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelEditPopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <a href="/seller/dashboard/products/delete"><button style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Update</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isDeleteUserPopup ">
+        <div class="content" style="align-items: center;display: flex;justify-content: center;flex-direction: column;row-gap: 20px;width: 300px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Are You Sure?
+            </div>
+            <div style="font-size: 21px;margin-top: -8px;margin-bottom: 16px;">You Want to Delete this Product</div>
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelDeletePopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <a href="/seller/dashboard/products/delete"><button style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Delete</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

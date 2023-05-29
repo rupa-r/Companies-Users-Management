@@ -1,0 +1,210 @@
+<body style="background-color: lightgray;margin: 0px;">
+    
+    <div style="background: #e65c7b;padding: 10px;color: white;display: flex;align-items: center;justify-content: space-between;">
+        <div>
+            <a style="text-decoration: none;color: white;" href="/buyer/login"><h1 style="margin: 0px;">User</h1></a>
+        </div>
+    </div>
+
+    <div style="margin: 50px; background-color: white;height: auto;padding: 50px;">
+        <div style="display: flex;align-items: center;justify-content: space-between;font-size: 24px;color: #e65c7b;font-weight: 500;">
+            <div>Users</div>
+            <div style="margin-bottom: 20px; font-size: 30px; font-weight: 500;">
+                <button (click)="onClickMigrateUser()" style="background: none;border: 1px solid #e65c7b;border-radius: 4px;padding: 6px 18px;color: #e65c7b;font-size: 20px;font-weight: 500;cursor: pointer;">Migrate User</button>
+            </div>
+        </div>
+
+        <div style="display: flex;justify-content: space-between;">
+            
+            <div style="display: flex;justify-content: space-between;width: 50%;">
+                <div>
+                    
+                    <br><br>
+                    
+                    <div style="display: flex;justify-content: space-between;align-items: center;column-gap: 120px;">
+                        <div style="display: flex;flex-direction: column;row-gap: 15px;font-size: 16px;font-weight: 500;">
+                            <div>User ID</div>
+                            <div>Frist Name</div>
+                            <div>Last Name</div>
+                            <div>Email</div>
+                            <div>Designation</div>
+                            <div>Date Of Birth</div>
+                            <div>Status</div>
+                        </div>
+                        
+                        <div *ngFor="let user of userDetails" style="display: flex;flex-direction: column;row-gap: 15px;font-size: 16px;font-weight: 700;">
+                            <div>{{ user.userid }}</div>
+                            <div>{{ user.fristname }}</div>
+                            <div>{{ user.lastname }}</div>
+                            <div>{{ user.email }}</div>
+                            <div>{{ user.designation }}</div>
+                            <div>{{ user.dob }}</div>
+                            <div>{{ user.status }} <span>{{ activeDeactive }}</span> </div>
+                        </div>
+
+                    </div>
+                
+                </div>
+                <div style="display: flex;column-gap: 8px;">
+                    <div style="color: #e65c7b;" (click)="onClickEditUser()">Edit</div>
+                    <div style="height: 20px;width: 1px;background: #e65c7b;;"></div>
+                    <div  style="color: #e65c7b;"  (click)="onClickDeleteUser()">Delete</div >
+                    <div style="height: 20px;width: 1px;background: #e65c7b;;"></div>
+                    <div  style="color: #e65c7b;"  (click)="onClickActiveUser()" *ngIf="Active">Active</div>
+                    <div  style="color: #e65c7b;"  (click)="onClickDeactiveUser()" *ngIf="Deactive">Deactive</div>
+                </div>
+            </div>
+
+            <div style="height: 60px;background-color: lightgray;padding: 20px;">
+                <div style="font-size: 20px;font-weight: 700;margin-bottom: 10px;">{{ companyName }}</div>
+                <div>{{ companyAddress }}</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal" *ngIf="isEditUserPopup ">
+        <div class="content" style="display: flex;flex-direction: column;row-gap: 30px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Edit User
+            </div>
+
+            <form action="" style="display: flex;flex-direction: column;row-gap: 20px;" [formGroup]="usereditForm" novalidate>
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Frist Name</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <div>
+                            <input [(ngModel)]="fristName" formControlName="fristname" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="text" name="" id="">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Last Name</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <input [(ngModel)]="lastName" value="{{ userDetails[0].fristname}}" formControlName="lastname" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="text" name="" id="">
+                    </div>
+                </div>
+            
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Email</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <input [(ngModel)]="Email" formControlName="email" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Designation</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <input [(ngModel)]="Designation" formControlName="designation" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Date Of Birth</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <input [(ngModel)]="DoB" formControlName="dob" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="date" name="" id="">
+                    </div>
+                </div>
+            </form>
+
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelEditPopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <button (click)="updateUser()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isDeleteUserPopup ">
+        <div class="content" style="align-items: center;display: flex;justify-content: center;flex-direction: column;row-gap: 20px;width: 300px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Are You Sure?
+            </div>
+            <div style="font-size: 21px;margin-top: -8px;margin-bottom: 16px;">You Want to Delete this Product</div>
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelDeletePopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <button (click)="deleteUser()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" *ngIf="isMigrateUserPopup ">
+        <div class="content" style="display: flex;justify-content: center;flex-direction: column;row-gap: 20px;width: 300px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Migrate User
+            </div>
+            <div style="margin-top: 8px;">
+                <label for="" style="font-size: 16px;">Choose Company</label>
+                <form action="" style="font-size: 21px;margin-top: 10px;display: flex;flex-direction: column;row-gap: 20px;" [formGroup]="migrateusercreateForm" novalidate>
+                    <select formControlName="companyid" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;">Coose Company
+                        <option *ngFor="let companies of companylistAll" value="{{ companies.companyid }}">{{ companies.companyname }}</option>
+                    </select>
+                </form>
+            </div>
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelMigratePopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <button (click)="migrateUser()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Migrate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal" *ngIf="isDeactiveUserPopup ">
+        <div class="content" style="align-items: center;display: flex;justify-content: center;flex-direction: column;row-gap: 20px;width: 300px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Are You Sure?
+            </div>
+            <div style="font-size: 21px;margin-top: -8px;margin-bottom: 16px;">You Want to Deactive this User</div>
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelDeletePopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <button (click)="deactiveUser()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Deactive</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isActiveUserPopup ">
+        <div class="content" style="align-items: center;display: flex;justify-content: center;flex-direction: column;row-gap: 20px;width: 300px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Are You Sure?
+            </div>
+            <div style="font-size: 21px;margin-top: -8px;margin-bottom: 16px;">You Want to Active this User</div>
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelDeletePopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <button (click)="activeUser()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Active</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

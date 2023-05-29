@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<body style="background-color: lightgray;margin: 0px;">
+    
+    <div style="background: #e65c7b;padding: 10px;color: white;display: flex;align-items: center;justify-content: space-between;">
+        <div>
+            <a style="text-decoration: none;color: white;" href="/buyer/login"><h1 style="margin: 0px;">Company</h1></a>
+        </div>
+    </div>
+    
+    <div style="padding: 50px;margin: 50px;display: flex;justify-content: space-between;column-gap: 30px;">
+        <div style="width: 50%;">
+            <div style="display: flex;align-items: center;justify-content: flex-end;column-gap: 8px;">
+                <div style="color: #e65c7b;" (click)="onClickEditUser()">Edit</div>
+                <div style="height: 20px;width: 1px;background: #e65c7b;;"></div>
+                <div  style="color: #e65c7b;"  (click)="onClickDeleteUser()">Delete</div >
+            
+            </div>
+            <div style="display: flex;align-items: center;column-gap: 50px;margin-top: 30px;font-size: 20px;font-weight: 500;">
+                <div style="display: flex;flex-direction: column;row-gap: 10px;">
+                    <div>Name</div>
+                    <div>Address</div>
+                </div>
+                <div style="display: flex;flex-direction: column;row-gap: 10px;">
+                    <div>{{ companiesName }}</div>
+                    <div>{{ companiesAddress }}</div>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <div style="margin: 50px; background-color: white;height: auto;padding: 50px;">
+        <div style="display: flex;align-items: center;justify-content: space-between;font-size: 24px;color: #e65c7b;font-weight: 500;">
+            <div>Users</div>
+            <div style="font-size: 30px; font-weight: 500;">
+                <button (click)="onClickAddUser()" style="background: none;border: 1px solid #e65c7b;border-radius: 4px;padding: 6px 18px;color: #e65c7b;font-size: 20px;font-weight: 500;cursor: pointer;">Add New</button>
+            </div>
+        </div>
+        <div>
+            <div>
+                <table style="width: 100%;border-collapse: collapse;margin-top: 30px;">
+                    <thead style="background-color: #e65c7b;color: white;font-size: 16px;font-weight: 500;text-align: center;">
+                        <tr>
+                            <td style="padding: 6px 10px;">Id</td>
+                            <td style="padding: 6px 10px;">Name</td>
+                            <td style="padding: 6px 10px;">Status</td>
+                            <td style="padding: 6px 10px;">Action</td>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 16px;font-weight: 500;text-align: center;">
+                        <tr *ngFor="let userlistall of users">
+                            <td style="padding: 6px 10px;">{{ userlistall.userid }}</td>
+                            <td style="padding: 6px 10px;">{{ userlistall.fristname }} {{ userlistall.lastname }}</td>
+                            <td style="padding: 6px 10px;">{{ userlistall.status }}</td>
+                            <td style="padding: 6px 10px;">
+                                <div style="display: flex;align-items: center;justify-content: center;column-gap: 8px;">
+                                    <a href="/user?id={{ userlistall._id }}" style="color: #e65c7b;"><div>View</div></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isAddUserPopup ">
+        <div class="content" style="display: flex;flex-direction: column;row-gap: 30px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Add User
+            </div>
+            <form action="" style="display: flex;flex-direction: column;row-gap: 20px;" [formGroup]="usercreateForm" novalidate>
+
+                <input formControlName="companyid" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" value="{{ companyId }}" type="hidden" name="" id="">
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Frist Name</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <div>
+                            <input formControlName="fristname" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="text" name="" id="">
+                        </div>
+                        <div style="margin-top: 5px;" *ngIf="isVaild('fristname')">
+                            <div style="color: #f33; font-weight: 400; font-size: 12px;" *ngIf="usercreateForm.controls['fristname'].errors?.required">
+                                Company Name is required*
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Last Name</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <input formControlName="lastname" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="text" name="" id="">
+                    </div>
+                </div>
+            
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Email</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <input formControlName="email" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Designation</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <input formControlName="designation" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Date Of Birth</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <input formControlName="dob" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="date" name="" id="">
+                    </div>
+                </div>
+            </form>
+
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelAddPopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <button (click)="createUser()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isEditUserPopup ">
+        <div class="content" style="display: flex;flex-direction: column;row-gap: 30px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Edit Company
+            </div>
+
+                
+            <form action="" [formGroup]="updateCompanydata">
+                
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Company Name</label>
+                    </div>
+                    <div style="width: 70%;margin-bottom: 20px;">
+                        <input formControlName="companyname" value="{{ companiesName }}" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;" type="email" name="" id="">
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center;column-gap: 20px;width: 400px;">
+                    <div style="width: 30%;">
+                        <label for="">Company Address</label>
+                    </div>
+                    <div style="width: 70%;">
+                        <textarea formControlName="companyaddress" value="{{ companiesAddress }}" name="" id="" cols="30" rows="10" style="width: 100%;padding: 10px;border-radius: 4px;border: 1px solid lightgray;"></textarea>
+                    </div>
+                </div>
+
+            </form>
+
+
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelEditPopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <button (click)="editCompany()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isDeleteUserPopup ">
+        <div class="content" style="align-items: center;display: flex;justify-content: center;flex-direction: column;row-gap: 20px;width: 300px;">
+            <div style="color: #e65c7b;font-size: 26px;font-weight: 900;">
+                Are You Sure?
+            </div>
+            <div style="font-size: 21px;margin-top: -8px;margin-bottom: 16px;">You Want to Delete this Product</div>
+            <div style="display: flex;align-items: center;column-gap: 10px;">
+                <div>
+                    <button (click)="cancelDeletePopup()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;cursor: pointer;">Cancel</button>
+                </div>
+                <div>
+                    <button (click)="deleteCompany()" style="padding: 10px 25px;border: none;font-size: 16px;border-radius: 4px;background-color: #e65c7b;color: white;cursor: pointer;">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
